@@ -33,7 +33,7 @@ def maybe_download_from_gdrive(file_id, file_path):
 def load_models():
     try:
         maybe_download_from_gdrive("1UUYrKXjWKM4aUYSeB52CXLtVerJGf-2b", "models/gstore_rfr_model.pkl")
-        maybe_download_from_gdrive("1SoSZtcgKwrS7mVIhLJ7pTClNp6Q51XiG", "models/xgb_model.pkl")
+        maybe_download_from_gdrive("1SoSZtcgKwrS7mVIhLJ7pTClNp6Q51XiG", "models/xgboost_model.pkl")
         maybe_download_from_gdrive("16gcOixrPgBOT8jQXGg4ewvyjQ_4ohrge", "models/faiss_recommender.idx")
         maybe_download_from_gdrive("1HbfVwrOvvymDAuKOaw22PXq2K8nFmgLs", "models/scaler.pkl")
         maybe_download_from_gdrive("160jtBbD3GxNysem6QXc_IVPcvSiJ4GVM", "models/cat_encoder.pkl")
