@@ -42,7 +42,7 @@ def load_models():
 
 
         regressor = joblib.load("models/gstore_rfr_model.pkl")
-        classifier = joblib.load("models/xgb_model.pkl")
+        classifier = joblib.load("models/xgboost_model.pkl")
         scaler = joblib.load("models/scaler.pkl")
         encoder = joblib.load("models/cat_encoder.pkl")
         faiss_index = faiss.read_index("models/faiss_recommender.idx")
