@@ -14,6 +14,9 @@ import joblib
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
+# Load models (cached, only loads once even if called multiple times)
+regressor, classifier, scaler, encoder, faiss_index, feature_matrix, gs_df = load_models()
+
 # Add parent directory to path
 parent_dir = str(Path(__file__).parent.parent)
 sys.path.append(parent_dir)
@@ -48,8 +51,7 @@ load_css()
 # MODEL LOADING
 # ============================================================================
 
-# Load models (cached, only loads once even if called multiple times)
-regressor, classifier, scaler, encoder, faiss_index, feature_matrix, gs_df = load_models()
+
 
 # ============================================================================
 # HEADER
