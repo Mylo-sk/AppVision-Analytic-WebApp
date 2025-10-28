@@ -198,15 +198,15 @@ def render_homepage():
     
     with col1:
         if st.button("Launch Regressor", use_container_width=True, type="primary"):
-            st.switch_page("pages/1_📊_Regressor.py")
+            st.switch_page("pages/1_Regressor.py")
     
     with col2:
         if st.button("Launch Classifier", use_container_width=True, type="primary"):
-            st.switch_page("pages/2_🎯_Classifier.py")
+            st.switch_page("pages/2_Classifier.py")
     
     with col3:
         if st.button("Launch Recommender", use_container_width=True, type="primary"):
-            st.switch_page("pages/3_📱_Recommender.py")
+            st.switch_page("pages/3_Recommender.py")
     
     st.markdown("---")
     
