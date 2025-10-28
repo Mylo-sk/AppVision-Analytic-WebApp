@@ -9,10 +9,12 @@ from pathlib import Path
 import pandas as pd
 import numpy as np
 import joblib
+from utils.model_loader import load_models
 
 # Add parent directory to path
 parent_dir = str(Path(__file__).parent.parent)
 sys.path.append(parent_dir)
+
 
 from utils.styling import load_css, create_header, create_section_header
 from utils.config import (
@@ -43,22 +45,8 @@ load_css()
 # ============================================================================
 # MODEL LOADING
 # ============================================================================
-
-@st.cache_resource
-def load_regressor_model():
-    """
-    Load the pre-trained regressor model
-    Replace with your actual model path
-    """
-    try:
-        # IMPORTANT: Update this path to your actual model file
-        model_path = r"C:\Users\USER\Documents\Data Science Repositories\appvision_predictor\models\gstore_rfr_model.pkl"
-        model = joblib.load(model_path)
-        return model
-    except Exception as e:
-        st.error(f"⚠️ Error loading model: {e}")
-        st.info("Please ensure your model file is in the 'models' directory")
-        return None
+# Load models (cached, only loads once even if called multiple times)
+regressor, classifier, scaler, encoder, faiss_index, feature_matrix, gs_df = load_models()
 
 # ============================================================================
 # HEADER
@@ -315,10 +303,10 @@ if predict_button:
                 st.warning(warning)
     
     # Load model
-    model = load_regressor_model()
+    model = regressor
     
-    if model is None:
-        st.error("❌ Model could not be loaded. Please check model file.")
+    if regressor is None:
+        st.error("⚠️ Model could not be loaded. Please check model file.")
         st.stop()
     
     # Prepare input

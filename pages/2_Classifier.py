@@ -7,6 +7,7 @@ Classifies apps into 4 tiers: Low Performance, Emerging, Popular, or Viral
 import streamlit as st
 import sys
 from pathlib import Path
+from utils.model_loader import load_models
 import pandas as pd
 import numpy as np
 import joblib
@@ -47,21 +48,8 @@ load_css()
 # MODEL LOADING
 # ============================================================================
 
-@st.cache_resource
-def load_classifier_model():
-    """
-    Load the pre-trained classifier model (XGBoost)
-    Replace with your actual model path
-    """
-    try:
-        # IMPORTANT: Update this path to your actual model file
-        model_path = r"C:\Users\USER\Documents\Data Science Repositories\appvision_predictor\models\xgboost_model.pkl"
-        model = joblib.load(model_path)
-        return model
-    except Exception as e:
-        st.error(f"⚠️ Error loading model: {e}")
-        st.info("Please ensure your classifier model file is in the 'models' directory")
-        return None
+# Load models (cached, only loads once even if called multiple times)
+regressor, classifier, scaler, encoder, faiss_index, feature_matrix, gs_df = load_models()
 
 # ============================================================================
 # HEADER
@@ -315,11 +303,8 @@ if predict_button:
                 st.warning(warning)
     
     # Load model
-    model = load_classifier_model()
+    model = classifier
     
-    if model is None:
-        st.error("❌ Model could not be loaded. Please check model file.")
-        st.stop()
     
     # Prepare input
     with st.spinner("🔄 Classifying your app..."):
